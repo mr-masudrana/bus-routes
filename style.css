@@ -1,0 +1,14 @@
+body {
+  background: #f5f5f5;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.route-card {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.route-card:hover {
+  transform: scale(1.02);
+  background-color: #e9f7ef;
+}
