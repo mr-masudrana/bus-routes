@@ -6,24 +6,59 @@ fetch("routes.json")
     const list = document.getElementById("routeList");
     const fromInput = document.getElementById("fromStation");
     const toInput = document.getElementById("toStation");
+    const resetFrom = document.getElementById("resetFrom");
+    const resetTo = document.getElementById("resetTo");
 
     // Collect all unique stoppages
     const stopSet = new Set();
     data.forEach(route => route.stoppages.forEach(stop => stopSet.add(stop)));
     allStops = Array.from(stopSet).sort();
 
-    // Autocomplete listeners
+    renderRoutes(data);
+
+    // Autocomplete + reset button show/hide
     fromInput.addEventListener("input", () => {
       showSuggestions(fromInput, "fromList");
       filterRoutes(data);
+      toggleResetButton(fromInput, resetFrom);
     });
 
     toInput.addEventListener("input", () => {
       showSuggestions(toInput, "toList");
       filterRoutes(data);
+      toggleResetButton(toInput, resetTo);
     });
 
-    renderRoutes(data);
+    // Reset button actions
+    resetFrom.addEventListener("click", () => {
+      fromInput.value = "";
+      document.getElementById("fromList").innerHTML = "";
+      resetFrom.style.display = "none";
+      filterRoutes(data);
+    });
+
+    resetTo.addEventListener("click", () => {
+      toInput.value = "";
+      document.getElementById("toList").innerHTML = "";
+      resetTo.style.display = "none";
+      filterRoutes(data);
+    });
+
+    function toggleResetButton(input, button) {
+      button.style.display = input.value.trim() ? "block" : "none";
+    }
+
+    function filterRoutes(routes) {
+      const fromVal = fromInput.value.trim().toLowerCase();
+      const toVal = toInput.value.trim().toLowerCase();
+
+      const filtered = routes.filter(route =>
+        (!fromVal || route.stoppages.some(s => s.toLowerCase().includes(fromVal))) &&
+        (!toVal || route.stoppages.some(s => s.toLowerCase().includes(toVal)))
+      );
+
+      renderRoutes(filtered);
+    }
 
     function renderRoutes(filteredData) {
       list.innerHTML = "";
@@ -48,18 +83,6 @@ fetch("routes.json")
       });
     }
 
-    function filterRoutes(routes) {
-      const fromVal = fromInput.value.trim().toLowerCase();
-      const toVal = toInput.value.trim().toLowerCase();
-
-      const filtered = routes.filter(route =>
-        (!fromVal || route.stoppages.some(s => s.toLowerCase().includes(fromVal))) &&
-        (!toVal || route.stoppages.some(s => s.toLowerCase().includes(toVal)))
-      );
-
-      renderRoutes(filtered);
-    }
-
     function showSuggestions(inputEl, listId) {
       const val = inputEl.value.trim().toLowerCase();
       const listDiv = document.getElementById(listId);
@@ -71,12 +94,14 @@ fetch("routes.json")
 
       matches.forEach(match => {
         const item = document.createElement("div");
-        item.className = "autocomplete-item";
+        item.className = "autocomplete-item px-2 py-1 border-bottom hover-bg";
+        item.style.cursor = "pointer";
         item.textContent = match;
         item.onclick = () => {
           inputEl.value = match;
           listDiv.innerHTML = "";
           filterRoutes(data);
+          toggleResetButton(inputEl, inputEl === fromInput ? resetFrom : resetTo);
         };
         listDiv.appendChild(item);
       });
