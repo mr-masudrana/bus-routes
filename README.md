@@ -18,7 +18,17 @@
 
 ## 📁 ফোল্ডার স্ট্রাকচার
 
-/ ├── index.html ├── stoppage.html ├── app.js ├── stoppage.js ├── routes.json ├── style.css ├── manifest.json ├── sw.js ├── LICENSE └── README.md
+.
+├── index.html 
+├── stoppage.html 
+├── main.js 
+├── script.js 
+├── routes.json 
+├── style.css 
+├── manifest.json 
+├── service-worker.js 
+├── LICENSE 
+└── README.md
 
 ## 🛠️ ইনস্টলেশন ও রান করার নিয়ম
 
@@ -49,11 +59,6 @@ npx serve .
 
 এই প্রজেক্টটি MIT লাইসেন্স এর অধীনে উন্মুক্ত।
 
-
----
-
-Made with ❤️ for Dhaka commuters.
-
 ---
 
 ### ✅ `LICENSE`
@@ -61,7 +66,7 @@ Made with ❤️ for Dhaka commuters.
 ```text
 MIT License
 
-Copyright (c) 2025 [Your Name]
+Copyright (c) 2025 Masud Rana
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
