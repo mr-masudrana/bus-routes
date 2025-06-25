@@ -12,13 +12,26 @@
 <body>
   <div class="container py-3">
     <h4 class="text-center mb-3 fw-bold">🚌 ঢাকা বাস রুট</h4>
-
-    <div class="search-box p-3 bg-white rounded shadow-sm mb-4 position-relative">
-      <input type="text" id="fromStation" class="form-control mb-2" placeholder="যাত্রা শুরু (যেমন: মিরপুর)">
-      <div id="fromList" class="autocomplete-box rounded bg-white position-absolute w-100"></div>
-
-      <input type="text" id="toStation" class="form-control" placeholder="গন্তব্য (যেমন: গুলিস্তান)">
-      <div id="toList" class="autocomplete-box  rounded bg-white position-absolute w-100"></div>
+    <div class="search-box p-3 bg-white rounded shadow-sm mb-4">
+      <!-- From input with reset -->
+      <div class="position-relative mb-2">
+        <div class="input-group">
+          <span class="input-group-text">🚩</span>
+          <input type="text" id="fromStation" class="form-control" placeholder="যাত্রা শুরু (যেমন: মিরপুর)">
+        </div>
+        <button id="resetFrom" class="btn position-absolute top-0 end-0 m-1" style="display: none;">❌</button>
+        <div id="fromList" class="autocomplete-box position-absolute shadow bg-white w-100"></div>
+      </div>
+    
+      <!-- To input with reset -->
+      <div class="position-relative">
+        <div class="input-group">
+          <span class="input-group-text">🏁</span>
+          <input type="text" id="toStation" class="form-control" placeholder="গন্তব্য (যেমন: গুলিস্তান)">
+        </div>
+        <button id="resetTo" class="btn position-absolute top-0 end-0 m-1" style="display: none;">❌</button>
+        <div id="toList" class="autocomplete-box position-absolute shadow bg-white w-100"></div>
+      </div>
     </div>
 
     <div id="routeList" class="d-grid gap-3"></div>
