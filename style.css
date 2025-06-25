@@ -27,3 +27,9 @@ body {
 .autocomplete-item:hover {
   background-color: #f1f1f1;
 }
+
+#resetFrom, #resetTo {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  z-index: 10;
+}
